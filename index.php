@@ -1,5 +1,7 @@
 <?php
 require 'db_pass.php';
+require 'php/lib.inc.php';
+
 
 
 ?>
@@ -56,11 +58,26 @@ require 'db_pass.php';
             <img src="img/hacker_vlad.jpg" alt="Logo" class="img-responsive" style="min-width:230px; width:400px"/>
         </div>
         <div class=" col-sm-6">
-            <h3>Some Text</h3>
-            <h3><?=$db_pass?></h3>>
+            <h3>Some Text <?php print_echo("hello world")?></h3>
+            <h3><?php db_connect()?></h3>
+            <h3><?php ?>  </h3>
         </div>
     </div>
 </div>
+
+<?php records_print() ?>
+
+
+<!-- 
+
+  #1. Надо переделать в db_pass с переменных в константы 
+  #2. Или сделать их глобальными
+3. надо дату создания записи включить в таблицу
+
+-->
+
+
+<!-- test container with bottom align
 <div class="container col-md-6">
     <div class="row">
         <div class="col-sm-6">
@@ -70,7 +87,8 @@ require 'db_pass.php';
             <h3>Some Text</h3>
         </div>
     </div>
-</div>
+</div> -->
+<!-- another test container
 <div class="container col-md-6">
     <div class="row">
         <div class="col-sm-6">
@@ -80,7 +98,9 @@ require 'db_pass.php';
             <h3>Some Text</h3>
         </div>
     </div>
-</div>
+</div> -->
+
+
 
     
 

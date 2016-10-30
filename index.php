@@ -1,3 +1,8 @@
+<?php
+require 'db_pass.php';
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,10 +53,11 @@
 <div class="container col-md-6">
     <div class="row">
         <div class="col-sm-6">
-            <img src="hacker_vlad.jpg" alt="Logo" class="img-responsive" style="min-width:230px; width:400px"/>
+            <img src="img/hacker_vlad.jpg" alt="Logo" class="img-responsive" style="min-width:230px; width:400px"/>
         </div>
         <div class=" col-sm-6">
             <h3>Some Text</h3>
+            <h3><?=$db_pass?></h3>>
         </div>
     </div>
 </div>

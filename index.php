@@ -8,7 +8,7 @@ require 'php/lib.inc.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>BSoDw</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -38,33 +38,77 @@ require 'php/lib.inc.php';
 </div>
   
 <div class="container">
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">ADD</button>
  <div class="row">
-    <!-- <div class="col-sm-6">
-    
-      <div class="media">
-        <div class="media-left">
-          <img src="hacker_dan.jpg" class="media-object img-thumbnail" style="width:260px">
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading">Hacker Dan</h4><i>Russia, Astrakhan Posted 26.10.2016</i>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-      </div>
-    </div> -->
 
-<div class="container col-md-6">
-    <div class="row">
-        <div class="col-sm-6">
-            <img src="img/hacker_vlad.jpg" alt="Logo" class="img-responsive" style="min-width:230px; width:400px"/>
-        </div>
-        <div class=" col-sm-6">
-            <h3>Some Text <?php print_echo("hello world")?></h3>
-            <h3><?php db_connect()?></h3>
-            <h3><?php ?>  </h3>
-        </div>
-    </div>
-</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="form" enctype="multipart/form-data" role="form">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">Upload Photo</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+            <!-- <label for="Name">Name:</label> -->
+            <input name="Name" type="text" class="form-control" id="Name" placeholder="Type your name">
+          </div>
+          <div class="form-group">
+            <!-- <label for="Country">Country:</label> -->
+            <input name="Country" type="text" class="form-control" id="Country" placeholder="Type your country">
+          </div>
+                                <div id="messages"></div>
+                                <input type="file" name="file" id="file">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default onclick-reload" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="submitForm">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+<!--END Modal -->
 
+<!-- ajax for make record -->
+
+<script>
+               $('#form').submit(function(e) {
+              var form = $(this);
+                var formdata = false;
+                if(window.FormData){
+                    formdata = new FormData(form[0]);
+                }
+
+                var formAction = form.attr('action');
+
+                $.ajax({
+                    type        : 'POST',
+                    url         : 'img_upload.php',
+                    cache       : false,
+                    data        : formdata ? formdata : form.serialize(),
+                    contentType : false,
+                    processData : false,
+
+                    // success: function(data, textStatus)
+                    success: function(data, textStatus) {
+                  $('#myModal .modal-header .modal-title').html("Result");
+                  $('#myModal .modal-body').html(data);
+
+                  $("#submitForm").remove();
+                  $('.onclick-reload').click(function() {
+                  location.reload();
+                  });
+                }
+
+                });
+                e.preventDefault();
+           });
+</script>
+
+<!-- END ajax for make record -->
 <?php records_print() ?>
 
 
@@ -76,35 +120,33 @@ require 'php/lib.inc.php';
 
 -->
 
+<!-- js form modal  -->
 
-<!-- test container with bottom align
-<div class="container col-md-6">
-    <div class="row">
-        <div class="col-sm-6">
-            <img src="//placehold.it/600x300" alt="Logo" class="img-responsive"/>
-        </div>
-        <div class="bottom-align-text col-sm-6">
-            <h3>Some Text</h3>
-        </div>
-    </div>
-</div> -->
-<!-- another test container
-<div class="container col-md-6">
-    <div class="row">
-        <div class="col-sm-6">
-            <img src="//placehold.it/600x300" alt="Logo" class="img-responsive"/>
-        </div>
-        <div class="col-sm-6">
-            <h3>Some Text</h3>
-        </div>
-    </div>
-</div> -->
+<!-- 
+<script type="text/javascript">
+     $(document).ready(function () {
+$("input#submit").click(function(){
+    $.ajax({
+        type: "POST",
+        url: "process.php", //process to mail
+        data: $('form.contact').serialize(),
+        success: function(msg){
+            $("#thanks").html(msg) //hide button and show thank you
+            $("#form-content").modal('hide'); //hide popup  
+        },
+        error: function(){
+            alert("failure");
+        }
+    });
+});
+});
+  </script>
 
-
+ -->
 
     
 
-  </div>
+  </div> <!-- row -->
 </div>
 
 </body>

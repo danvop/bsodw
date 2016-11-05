@@ -13,7 +13,7 @@ require 'php/lib.inc.php';
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <style>
   	@media (min-width: 768px ) {
 	  .row {
@@ -38,7 +38,7 @@ require 'php/lib.inc.php';
 </div>
   
 <div class="container">
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">ADD</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Open Modal</button>
  <div class="row">
 
 <!-- Modal -->
@@ -75,7 +75,7 @@ require 'php/lib.inc.php';
 <!-- ajax for make record -->
 
 <script>
-               $('#form').submit(function(e) {
+            $('#form').submit(function(e) {
               var form = $(this);
                 var formdata = false;
                 if(window.FormData){
@@ -103,10 +103,23 @@ require 'php/lib.inc.php';
                   });
                 }
 
+
+
+
+                    // success: function(response) {
+                    //     if(response != 'error') {
+                    //         $('#messages').addClass('alert alert-success').text(response);
+                    //         // OP requested to close the modal
+                    //         //$('#myModal').modal('hide');
+                    //     } else {
+                    //         $('#messages').addClass('alert alert-danger').text(response);
+                    //     }
+                    // }
                 });
                 e.preventDefault();
            });
-</script>
+        </script>
+
 
 <!-- END ajax for make record -->
 <?php records_print() ?>

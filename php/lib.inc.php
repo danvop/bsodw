@@ -64,6 +64,14 @@ function records_print()
     $conn->close();
 }
 
+
+/**
+ * [insert_to_base inserts data form from to]
+ * @param  [type] $name     [description]
+ * @param  [type] $country  [description]
+ * @param  [type] $img_name [description]
+ * @return [type]           [description]
+ */
 function insert_to_base($name, $country, $img_name) {
     $conn = mysqli_connect(SERVERNAME, DB_ROOT, DB_PASS, DB_NAME);
     //$name = mysqli_real_escape_string($conn, $name);

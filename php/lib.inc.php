@@ -27,7 +27,7 @@ function records_print()
 {
      $conn = mysqli_connect(SERVERNAME, DB_ROOT, DB_PASS, DB_NAME);
      $sql = "
-        SELECT rec_id, name, country, town, os_ver, descr, img_name, date
+        SELECT rec_id, name, descr, img_name, date
         FROM records;
      ";
 
@@ -52,9 +52,10 @@ function records_print()
             echo '</div>';
             echo '<div class=" col-sm-6">';
                 echo '<h4>'.$row['name'].'</h4>';
-                echo '<h5><i>'.$row['country'].' '.$row['town'].'</i></h5>';
+
+                // echo '<h5><i>'.$row['country'].' '.$row['town'].'</i></h5>';
             if ($row['date']) echo '<h5><i> Posted: '.$row['date'].'</i></h5>';
-            if ($row['os_ver']) echo '<h5>OS Version: '.$row['os_ver'].'</h5>';
+            // if ($row['os_ver']) echo '<h5>OS Version: '.$row['os_ver'].'</h5>';
                 echo '<p>'.$row['descr'].'</p>';
                 
             echo '</div>';
@@ -72,7 +73,7 @@ function records_print()
  * @param  [type] $img_name [description]
  * @return [type]           [description]
  */
-function insert_to_base($name, $country, $img_name) {
+function insert_to_base($name, $email, $descr, $img_name) {
     $conn = mysqli_connect(SERVERNAME, DB_ROOT, DB_PASS, DB_NAME);
     //$name = mysqli_real_escape_string($conn, $name);
     //$country = mysqli_real_escape_string($conn, $country);
@@ -81,8 +82,8 @@ function insert_to_base($name, $country, $img_name) {
     }
 
     $sql = "
-        INSERT INTO `records` (`name`, `country`, `img_name`, `date`)
-        VALUES ('$name', '$country', '$img_name', curdate())
+        INSERT INTO `records` (`name`, `email`, `descr`, `img_name`, `date`)
+        VALUES ('$name', '$email', '$descr', '$img_name', curdate())
     ";
     //  $sql = "
     //     INSERT INTO MyGuests (firstname, lastname, email)

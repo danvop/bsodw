@@ -21,19 +21,19 @@
           <label for="Name">Email:</label>
           <input name="Email" type="email" class="form-control" id="Name" placeholder="Type your email">
           </div>
-        <div class="form-group">
+       <!--  <div class="form-group">
           <label for="Country">Country:</label>
           <input name="Country" type="text" class="form-control" id="Country" placeholder="Type your country">
         </div>
         <div class="form-group">
           <label for="Town">Town:</label>
           <input name="Town" type="text" class="form-control" id="Country" placeholder="Type your town">
-        </div>
+        </div> -->
 
-        <div class="form-group">
+       <!--  <div class="form-group">
           <label for="OsVersion">OS version:</label>
           <input name="OsVersion" type="text" class="form-control" id="OsVersion" placeholder="Type your OS version">
-        </div>
+        </div> -->
         <div class="form-group">
           <label for="Description">Description:</label>
           <textarea name="Description" type="text" class="form-control" id="Description" placeholder=""></textarea>

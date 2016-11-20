@@ -21,26 +21,14 @@
           <label for="Name">Email:</label>
           <input name="Email" type="email" class="form-control" id="Name" placeholder="Type your email">
           </div>
-       <!--  <div class="form-group">
-          <label for="Country">Country:</label>
-          <input name="Country" type="text" class="form-control" id="Country" placeholder="Type your country">
-        </div>
-        <div class="form-group">
-          <label for="Town">Town:</label>
-          <input name="Town" type="text" class="form-control" id="Country" placeholder="Type your town">
-        </div> -->
-
-       <!--  <div class="form-group">
-          <label for="OsVersion">OS version:</label>
-          <input name="OsVersion" type="text" class="form-control" id="OsVersion" placeholder="Type your OS version">
-        </div> -->
+       
         <div class="form-group">
           <label for="Description">Description:</label>
           <textarea name="Description" type="text" class="form-control" id="Description" placeholder=""></textarea>
         </div>
                 
         <div class="form-group" id="file">
-          <input type="file" name="file" id="file" required>
+          <input type="file" name="file" id="file" >
         </div>
     
         <img id="img-captcha" src="php/captcha.php">
@@ -69,6 +57,24 @@
 Капчу надо сделать как один из инпутов и проверять в img_upload.php -->
 
 <script>
+  $(function() {
+    //выводит новый код CAPTCHA при открытии модального окна
+    //Math.random needs as trick   
+    $('#myModal').on('show.bs.modal', function () {
+      $('#img-captcha').attr('src', 'php/captcha.php?id='+Math.random()+'');
+    });
+    $("#reload-captcha").click(function() {
+      $('#img-captcha').attr('src', 'php/captcha.php?id='+Math.random()+'');
+    });
+
+  });
+
+</script>
+
+
+
+
+<!-- <script>
     $(function() {
     //выводит новый код CAPTCHA при открытии модального окна  
     $('#myModal').on('show.bs.modal', function () {
@@ -150,7 +156,7 @@
       }
     });
     });
-</script>
+</script> -->
 
 
 
@@ -174,22 +180,34 @@ $('#form').submit(function(e) {
     url         : '/php/img_upload.php',
     cache       : false,
     data        : formdata ? formdata : form.serialize(),
+    dataType    : 'json', 
     contentType : false,
     processData : false,
 
       
-      success: function(data, textStatus) {
-    $('#form').trigger('reset'); //reset form
-    $('#myModal .modal-header .modal-title').html("Result");
+    success: function(data, textStatus) {
+      
+    if (data.captcha_ok ==="true"){    
+      $('#form').trigger('reset'); //reset form
+      $('#myModal .modal-header .modal-title').html("Result");
 
-    $('#myModal .modal-body').html(data);
+      //$('#myModal .modal-body').html(data);
 
-    $("#submitForm").remove();
-    $('#form').trigger('reset');
-    $('.onclick-reload').click(function() {
-      location.reload();
-    });
+      $("#submitForm").remove();
+      $('#form').trigger('reset');
+      $('.onclick-reload').click(function() {
+        location.reload();
+      });
+      
+      console.log(data);
+      }
+      else {
+      
+        console.log(data.captcha_ok);
+      }
+      
     }
+
   });
     e.preventDefault();
 });

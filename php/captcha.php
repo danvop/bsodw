@@ -30,5 +30,4 @@ imagettftext($image, 18, $rotate, 28, 32, $colour, $font, $captchastring);
 //будет передавать изображение в формате png
 header('Content-type: image/png');
 // //выводит изображение
- imagepng($image);
-
+imagepng($image);

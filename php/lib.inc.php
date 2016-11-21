@@ -98,6 +98,69 @@ function insert_to_base($name, $email, $descr, $img_name) {
     $conn->close();
 }
 
+function captcha_test($post_capthca){
+if ($_SESSION["code"] == $post_capthca) {
+    return 'true';
+}else
+    return 'false';
+}
+
+function img_upload($target_file, $img_name){
+
+    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+    $uploadOk = 1;
+
+    // Check if image file is a actual image or fake image
+    if (isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["file"]["tmp_name"]);
+        if ($check !== false) {
+            $result['upload_error'] =  "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            return "File is not an image";
+            
+            $uploadOk = 0;
+            
+        }
+    }
+
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        $result['upload_error'] =  "Sorry, file already exists.
+        ";
+        $uploadOk = 0;
+    }
+    // Check file size
+    if ($_FILES["file"]["size"] > 5000000) {
+        return "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+    // Allow certain file formats
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+        return "Sorry, only JPG, JPEG, PNG & GIF files are allowed";
+        $uploadOk = 0;
+    }
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+            return 'Sorry, your file was not uploaded';
+    // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], $img_name)) {
+            //echo "The file ". basename($_FILES["file"]["name"]). " has been uploaded.";
+            return 1;
+            
+
+    } else {
+        return 'Sorry, there was an error uploading your file';
+    }
+
+    }    
+  
+}
+
+
 /*// Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection

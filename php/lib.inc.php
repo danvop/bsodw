@@ -4,25 +4,6 @@ function cleanStr($data)
     return trim(strip_tags($data));
 }
 
-
-
-
-
-/*function db_connect()
-{
-    //test function
-    //
-    //
-    $conn = mysqli_connect(SERVERNAME, DB_ROOT, DB_PASS, DB_NAME);
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-        echo "<h3> connection die </h3>";
-    } else {
-        echo "database OK";
-    }
-    mysqli_close($conn);
-}
-*/
 function records_print()
 {
      $conn = mysqli_connect(SERVERNAME, DB_ROOT, DB_PASS, DB_NAME);
@@ -91,7 +72,7 @@ function insert_to_base($name, $email, $descr, $img_name) {
     // ";
 
     if (mysqli_query($conn, $sql)) {
-        echo "New record created successfully";
+        // echo "New record created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -121,14 +102,12 @@ function img_upload($target_file, $img_name){
             return "File is not an image";
             
             $uploadOk = 0;
-            
         }
     }
 
     // Check if file already exists
     if (file_exists($target_file)) {
-        $result['upload_error'] =  "Sorry, file already exists.
-        ";
+        return "Sorry, file already exists";
         $uploadOk = 0;
     }
     // Check file size
@@ -160,23 +139,5 @@ function img_upload($target_file, $img_name){
   
 }
 
-
-/*// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-$sql = "INSERT INTO records (name, country)
-VALUES ('John', 'Doe')";
-
-if (mysqli_query($conn, $sql)) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
-mysqli_close($conn);*/
 
 

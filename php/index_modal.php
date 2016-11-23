@@ -41,11 +41,12 @@
 			<input id="text-captcha" name="captcha" type="text" class="form-control" required="required" value="">
 			<span class="glyphicon form-control-feedback"></span>
 		</div>
+        
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default onclick-reload" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary" id="submitForm">Save</button>
         </div>  
-        </div>
       </form>
     </div>
   </div>
@@ -90,7 +91,6 @@ var form = $(this);
     url         : '/php/img_upload.php',
     cache       : false,
     data        : formdata,
-    async       : false,
     dataType    : 'json', 
     contentType : false,
     processData : false,
@@ -99,20 +99,29 @@ var form = $(this);
     success: function(data, textStatus) {
     
     if (data.captcha_ok ==="false"){
+        console.log("capthca error");
         $("#text-captcha").parents('.form-group').addClass('has-error');
-        console.log(data);
-        return console.log("capthca error");
+        
+        
     } 
     if (data.error_msg != ''){
+      console.log("upload error");
       $("#fileHelpBlock").parents('.form-group').addClass('has-error');
       $("#fileHelpBlock").show();
       $("#fileHelpBlock").text(''+data.error_msg+'');
-      return console.log("upload error");
+      
     } 
     
-    console.log(data.upl_ok);  
-    $('#myModal .modal-header .modal-title').html("Result"); 
-    
+
+    if(data.upl_ok === "true"){ 
+    $('#form').trigger('reset');
+    $('#myModal .modal-header .modal-title').html("Result");
+    $('#myModal .modal-body').html('File uploaded successfull'); 
+    $("#submitForm").remove();
+    $('.onclick-reload').click(function() {
+      location.reload();  
+    });
+  }
     // if(data.captcha_ok ==='true') and (data.error_msg===''){
     //   console.log('success');
     //   $('#myModal .modal-header .modal-title').html("Result");
@@ -122,22 +131,21 @@ var form = $(this);
      // $('#myModal .modal-header .modal-title').html("Result");
     // }
     
-    
+    console.log(data);
     // form.submit();
     } //success
-
+  
   }) //ajax
   
   // 
-  // $('#form').trigger('reset'); //reset form
+  //  //reset form
   // $('#myModal .modal-header .modal-title').html("Result");
 
   // $('#myModal .modal-body').text('File uploaded successfull');
 
-  // $("#submitForm").remove();
+  // 
   // $('#form').trigger('reset');
-  // $('.onclick-reload').click(function() {
-  // location.reload();  
+  // 
   // }}  
 
     

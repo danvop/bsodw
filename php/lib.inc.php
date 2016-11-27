@@ -4,13 +4,15 @@ function cleanStr($data)
     return trim(strip_tags($data));
 }
 
-function records_print()
+function records_print($moderated)
 {
+
      $conn = mysqli_connect(SERVERNAME, DB_ROOT, DB_PASS, DB_NAME);
      $sql = "
         SELECT rec_id, name, descr, img_name, date
-        FROM records;
-     ";
+        FROM records
+        WHERE status = '".$moderated."'
+        ";
 
 
      $result = $conn->query($sql);
@@ -37,7 +39,7 @@ function records_print()
                 // echo '<h5><i>'.$row['country'].' '.$row['town'].'</i></h5>';
             if ($row['date']) echo '<h5><i> Posted: '.$row['date'].'</i></h5>';
             // if ($row['os_ver']) echo '<h5>OS Version: '.$row['os_ver'].'</h5>';
-                echo '<p>'.$row['descr'].'</p>';
+                echo '<p>'.nl2br($row['descr']).'</p>';
                 
             echo '</div>';
     echo '</div>';
@@ -110,8 +112,8 @@ function img_upload($target_file, $img_name){
         return "Sorry, file already exists";
         $uploadOk = 0;
     }
-    // Check file size
-    if ($_FILES["file"]["size"] > 5000000) {
+    // Check file size in KB
+    if ($_FILES["file"]["size"] > 2000000) {
         return "Sorry, your file is too large.";
         $uploadOk = 0;
     }

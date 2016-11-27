@@ -17,18 +17,7 @@ require 'php/lib.inc.php';
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="/js/lib.inc.js"></script>
   <style>
-    @media (min-width: 768px ) {
-    .row {
-        position: relative;
-    }
-
-    .bottom-align-text {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-  }
-
+    
   </style>
 </head>
 <body>
@@ -40,7 +29,7 @@ require 'php/lib.inc.php';
 </div>
   
 <div class="container">
-<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Open Modal</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Post your bsod</button>
 <div class="row">
 
 <?php
@@ -53,12 +42,26 @@ require 'php/lib.inc.php';
 
 
 <!-- END ajax for make record -->
-<?php records_print() ?>
 
+<?php 
+if (isset($_GET['user_role']) and ($_GET['user_role'] == 'admin')) {
+    records_print('not moderated'); 
+} else {
+    records_print('not moderated');
+}
+
+?>
  
   </div> 
-</div>
 
+
+</div>
+<hr>
+<footer class="footer">
+<div class="container">
+   <p class="text-muted">This project on GitHub</p>
+</div>
+</footer>
 </body>
 </html>
 

@@ -1,5 +1,5 @@
 <?php
-// captcha segment
+
 require $_SERVER['DOCUMENT_ROOT'].'/db_pass.php';
 require $_SERVER["DOCUMENT_ROOT"].'/php/lib.inc.php';
 
@@ -33,6 +33,7 @@ $upl_result = array (
 
 );
 
+//captcha checking
 if (captcha_test($_POST["captcha"]) == 'true' ) {
     $upl_result['captcha_ok'] = 'true';
     $img_upl_res = img_upload($target_file, $img_name);

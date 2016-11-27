@@ -20,6 +20,7 @@
           <div class="form-group">
           <label for="Name">Email:</label>
           <input name="Email" type="email" class="form-control" id="Name" placeholder="Type your email">
+          <span id="" class="help-block">Your email will not be shown but we need it to contact you later</span>
           </div>
        
         <div class="form-group">
@@ -29,7 +30,8 @@
                 
         <div class="form-group" id="file">
           <input type="file" name="file" id="file" required>
-          <span id="fileHelpBlock" class="help-block" style="display: none;">test text</span>
+          <span id="" class="help-block">Image size must be less than 2MB</span>
+          <span id="fileHelpBlock" class="help-block" style="display: none;"></span>
         </div>
     
         <img id="img-captcha" src="php/captcha.php">
@@ -116,7 +118,7 @@ var form = $(this);
     if(data.upl_ok === "true"){ 
     $('#form').trigger('reset');
     $('#myModal .modal-header .modal-title').html("Result");
-    $('#myModal .modal-body').html('File uploaded successfull'); 
+    $('#myModal .modal-body').html('Your bsod has been added and awaiting moderation'); 
     $("#submitForm").remove();
     $('.onclick-reload').click(function() {
       location.reload();  

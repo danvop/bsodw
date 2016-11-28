@@ -2,3 +2,4 @@ img/
 db_pass.php
 dump.sql
 test.php
+vendor/

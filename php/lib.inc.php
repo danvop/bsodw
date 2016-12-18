@@ -23,17 +23,24 @@ function records_print($moderated)
     while ($row = $result->fetch_assoc()) {
     //print_r($row);
     //
-        echo '<div class="container col-md-6" 
-        style="
-            margin-top:10px;
+        // echo '<div class="container" 
+        // style="
+        //     margin-top:10px;
 
-            ">';
-        echo '<div class="row">';
-            echo '<div class="col-sm-6">';
+        //     ">';
+            echo '<div class="col-sm-12 col-md-6 col-xs-12">';
+            
+            echo '<div class="img col-xs-12 col-sm-6 col-md-6">';
                 //<img src="img/hacker_vlad.jpg" alt="Logo" class="img-responsive" style="min-width:230px; width:400px"/>
-                echo '<img src="'.$row['img_name'].'"class="img-responsive" style="min-width:230px; width:400px"/>';
+                
+            
+                // echo '<img src="'.$row['img_name'].'"class="img-responsive" style="min-width:230px; width:400px"/>';
+
+            echo '<img src="'.$row['img_name'].'"class="" style=""/>';
+
+
             echo '</div>';
-            echo '<div class=" col-sm-6">';
+            echo '<div class="col-xs-12 col-sm-5 col-md-5">';
                 echo '<h4>'.$row['name'].'</h4>';
 
                 // echo '<h5><i>'.$row['country'].' '.$row['town'].'</i></h5>';
@@ -41,9 +48,9 @@ function records_print($moderated)
             // if ($row['os_ver']) echo '<h5>OS Version: '.$row['os_ver'].'</h5>';
                 echo '<p>'.nl2br($row['descr']).'</p>';
                 
-            echo '</div>';
+             echo '</div>';
     echo '</div>';
-    echo '</div>';
+    // echo '</div>';
     }
     $conn->close();
 }
